@@ -2,63 +2,127 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home</title>
 
 	<style>
-		body {
-			font-family: Arial, sans-serif;
-			background-color: #f1f3f6;
+		* {
 			margin: 0;
-			padding: 20px;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: "Segoe UI", sans-serif;
+		}
+
+		body {
+			min-height: 100vh;
+			background: linear-gradient(135deg, #dfeee3, #c9dfcf, #edf6ef);
+			padding: 30px;
 		}
 
 		.container {
-			background: #fff;
-			padding: 20px;
-			border-radius: 10px;
+			max-width: 900px;
+			margin: auto;
+			background: rgba(255, 255, 255, 0.9);
+			backdrop-filter: blur(10px);
+			border-radius: 24px;
+			padding: 30px;
+			box-shadow: 0 12px 35px rgba(93, 122, 102, 0.18);
+			border: 1px solid rgba(174, 198, 180, 0.4);
 		}
 
-		h3 {
-			margin-bottom: 5px;
+		.header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 25px;
+		}
+
+		.title {
+			color: #4f6d57;
+		}
+
+		.title h3 {
+			font-size: 22px;
+			margin-bottom: 4px;
+		}
+
+		.title p {
+			font-size: 14px;
+			color: #7b8f80;
+		}
+
+		.logout {
+			text-decoration: none;
+			color: #6f8f75;
+			font-weight: 600;
+			font-size: 14px;
+		}
+
+		.logout:hover {
+			text-decoration: underline;
 		}
 
 		.btn {
 			display: inline-block;
-			margin: 10px 0;
-			padding: 8px 12px;
-			background-color: #007bff;
+			margin: 10px 0 20px 0;
+			padding: 12px 18px;
+			border-radius: 14px;
+			background: linear-gradient(135deg, #8faa91, #6f8f75);
 			color: white;
 			text-decoration: none;
-			border-radius: 5px;
+			font-weight: 600;
+			font-size: 14px;
+			box-shadow: 0 8px 18px rgba(111, 143, 117, 0.25);
+			transition: all 0.25s ease;
 		}
 
 		.btn:hover {
-			background-color: #0056b3;
+			transform: translateY(-2px);
+			background: linear-gradient(135deg, #7f9f86, #5f7d65);
+			box-shadow: 0 12px 22px rgba(111, 143, 117, 0.35);
+		}
+
+		h4 {
+			color: #4f6d57;
+			margin-bottom: 10px;
 		}
 
 		table {
 			width: 100%;
 			border-collapse: collapse;
-			margin-top: 10px;
+			overflow: hidden;
+			border-radius: 16px;
+		}
+
+		thead {
+			background: linear-gradient(135deg, #8faa91, #6f8f75);
+			color: white;
 		}
 
 		th {
-			background-color: #007bff;
-			color: white;
-			padding: 10px;
+			padding: 14px;
+			font-size: 14px;
 		}
 
 		td {
-			padding: 10px;
-			border: 1px solid #ddd;
+			padding: 12px;
 			text-align: center;
+			background-color: #f7fbf8;
+			border-bottom: 1px solid #e3efe7;
+			color: #4f5f53;
 		}
 
-		.logout {
-			margin-top: 15px;
-			display: inline-block;
-			color: #007bff;
-			text-decoration: none;
+		tr:last-child td {
+			border-bottom: none;
+		}
+
+		tbody tr:hover td {
+			background-color: #eef6f0;
+		}
+
+		.empty {
+			padding: 20px;
+			color: #8b9d8f;
 		}
 	</style>
 </head>
@@ -66,8 +130,15 @@
 <body>
 
 <div class="container">
-	<h3>MY Website 20230140178</h3>
-	<p>Selamat datang di aplikasi!</p>
+
+	<div class="header">
+		<div class="title">
+			<h3> Website Friska 20230140163</h3>
+			<p>Selamat datang di aplikasi</p>
+		</div>
+
+		<a href="/" class="logout">Logout</a>
+	</div>
 
 	<a href="/form" class="btn">+ Input Data Mahasiswa</a>
 
@@ -83,12 +154,10 @@
 		</thead>
 
 		<tbody>
-		<!-- kalau data kosong -->
 		<tr th:if="${#lists.isEmpty(data)}">
-			<td colspan="3">Belum ada data</td>
+			<td colspan="3" class="empty">Belum ada data</td>
 		</tr>
 
-		<!-- tampil data -->
 		<tr th:each="user, iterStat : ${data}">
 			<td th:text="${iterStat.count}"></td>
 			<td th:text="${user.nama}"></td>
@@ -97,7 +166,6 @@
 		</tbody>
 	</table>
 
-	<a href="/" class="logout">Logout</a>
 </div>
 
 </body>
